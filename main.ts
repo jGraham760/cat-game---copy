@@ -289,8 +289,8 @@ forever(function () {
         . . . f f . . f f . . f f . . . 
         `, SpriteKind.Enemy)
     mySprite2.setPosition(6, 35)
-    if (true) {
-        mySprite.destroy()
+    if (mySprite2.overlapsWith(projectile)) {
+        mySprite2.destroy(effects.spray, 500)
     }
 })
 forever(function () {
