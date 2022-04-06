@@ -295,7 +295,7 @@ mySprite2.setPosition(randint(0, 70), randint(0, 70))
 mySprite2.setBounceOnWall(true)
 mySprite.setStayInScreen(true)
 forever(function () {
-    mySprite2.follow(mySprite, 50)
+    mySprite2.follow(mySprite, 40)
 })
 forever(function () {
     music.playMelody("D E F D E F D E ", 170)
