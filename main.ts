@@ -198,6 +198,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    mySprite.setPosition(pPostionX + 0, pPositiony + 10)
     animation.runImageAnimation(
     mySprite,
     [img`
@@ -246,12 +247,14 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         . . f d b d f d f . . . . . 
         . . . f f f f f f . . . . . 
         `],
-    500,
+    200,
     false
     )
 })
 let mySprite2: Sprite = null
 let projectile: Sprite = null
+let pPositiony = 0
+let pPostionX = 0
 let mySprite: Sprite = null
 mySprite = sprites.create(img`
     e e e . . . . e e e . . . . 
@@ -269,8 +272,8 @@ mySprite = sprites.create(img`
     . f d f f f d f f d f . . . 
     . f f . . f f . . f f . . . 
     `, SpriteKind.Player)
-let pPostionX = mySprite.left
-let pPositiony = mySprite.right
+pPostionX = mySprite.x
+pPositiony = mySprite.y
 forever(function () {
     mySprite2 = sprites.create(img`
         . . 4 4 4 . . . . 4 4 4 . . . . 
@@ -289,7 +292,7 @@ forever(function () {
         . . . f f . . f f . . f f . . . 
         `, SpriteKind.Enemy)
     mySprite2.setPosition(6, 35)
-    if (mySprite2.overlapsWith(projectile)) {
+    if (mySprite2.overlapsWith(mySprite)) {
         mySprite2.destroy(effects.spray, 500)
     }
 })
