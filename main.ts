@@ -250,8 +250,11 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
-let mySprite2: Sprite = null
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    mySprite2.destroy()
+})
 let projectile: Sprite = null
+let mySprite2: Sprite = null
 let mySprite: Sprite = null
 mySprite = sprites.create(img`
     e e e . . . . e e e . . . . 
@@ -272,27 +275,27 @@ mySprite = sprites.create(img`
 let pPostionX = mySprite.x
 let pPositiony = mySprite.y
 controller.moveSprite(mySprite)
+mySprite2 = sprites.create(img`
+    . . 4 4 4 . . . . 4 4 4 . . . . 
+    . 4 5 5 5 e . . e 5 5 5 4 . . . 
+    4 5 5 5 5 5 e e 5 5 5 5 5 4 . . 
+    4 5 5 4 4 5 5 5 5 4 4 5 5 4 . . 
+    e 5 4 4 5 5 5 5 5 5 4 4 5 e . . 
+    . e e 5 5 5 5 5 5 5 5 e e . . . 
+    . . e 5 f 5 5 5 5 f 5 e . . . . 
+    . . f 5 5 5 4 4 5 5 5 f . . f f 
+    . . f 4 5 5 f f 5 5 6 f . f 5 f 
+    . . . f 6 6 6 6 6 6 4 4 f 5 5 f 
+    . . . f 4 5 5 5 5 5 5 4 4 5 f . 
+    . . . f 5 5 5 5 5 4 5 5 f f . . 
+    . . . f 5 f f f 5 f f 5 f . . . 
+    . . . f f . . f f . . f f . . . 
+    `, SpriteKind.Enemy)
+mySprite2.setPosition(randint(0, 70), randint(0, 70))
+mySprite2.setBounceOnWall(true)
+mySprite.setStayInScreen(true)
 forever(function () {
-    mySprite2 = sprites.create(img`
-        . . 4 4 4 . . . . 4 4 4 . . . . 
-        . 4 5 5 5 e . . e 5 5 5 4 . . . 
-        4 5 5 5 5 5 e e 5 5 5 5 5 4 . . 
-        4 5 5 4 4 5 5 5 5 4 4 5 5 4 . . 
-        e 5 4 4 5 5 5 5 5 5 4 4 5 e . . 
-        . e e 5 5 5 5 5 5 5 5 e e . . . 
-        . . e 5 f 5 5 5 5 f 5 e . . . . 
-        . . f 5 5 5 4 4 5 5 5 f . . f f 
-        . . f 4 5 5 f f 5 5 6 f . f 5 f 
-        . . . f 6 6 6 6 6 6 4 4 f 5 5 f 
-        . . . f 4 5 5 5 5 5 5 4 4 5 f . 
-        . . . f 5 5 5 5 5 4 5 5 f f . . 
-        . . . f 5 f f f 5 f f 5 f . . . 
-        . . . f f . . f f . . f f . . . 
-        `, SpriteKind.Enemy)
-    mySprite2.setPosition(6, 35)
-    if (mySprite2.overlapsWith(mySprite)) {
-        mySprite2.destroy(effects.spray, 500)
-    }
+    mySprite2.follow(mySprite, 50)
 })
 forever(function () {
     music.playMelody("D E F D E F D E ", 170)
