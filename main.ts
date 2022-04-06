@@ -299,7 +299,7 @@ dog2 = sprites.create(img`
     . . . f 5 f f f 5 f f 5 f . . . 
     . . . f f . . f f . . f f . . . 
     `, SpriteKind.Enemy)
-dog2.setPosition(randint(0, 70), randint(0, 70))
+dog2.setPosition(randint(90, 100), randint(90, 10))
 mySprite2 = sprites.create(img`
     . . 4 4 4 . . . . 4 4 4 . . . . 
     . 4 5 5 5 e . . e 5 5 5 4 . . . 
@@ -319,6 +319,7 @@ mySprite2 = sprites.create(img`
 mySprite2.setPosition(randint(0, 70), randint(0, 70))
 mySprite2.setBounceOnWall(true)
 mySprite.setStayInScreen(true)
+dog2.setStayInScreen(true)
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -443,6 +444,7 @@ scene.setBackgroundImage(img`
     `)
 forever(function () {
     mySprite2.follow(mySprite, 40)
+    dog2.follow(mySprite, 40)
     if (mySprite.overlapsWith(mySprite2)) {
         mySprite.destroy(effects.spray, 500)
         game.over(false)
