@@ -294,6 +294,6 @@ forever(function () {
     }
 })
 forever(function () {
-    music.playMelody("D E F D E F D E ", 120)
-    music.playMelody("F G F E D E F G ", 120)
+    music.playMelody("D E F D E F D E ", 170)
+    music.playMelody("F G F E D E F G ", 170)
 })
