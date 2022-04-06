@@ -252,6 +252,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     mySprite2.destroy()
+    info.changeScoreBy(1)
 })
 let projectile: Sprite = null
 let mySprite2: Sprite = null
