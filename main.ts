@@ -251,11 +251,18 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    mySprite2.destroy()
-    info.changeScoreBy(1)
+    if (projectile.overlapsWith(mySprite2)) {
+        mySprite2.destroy()
+        info.changeScoreBy(1)
+    }
+    if (dog2.overlapsWith(projectile)) {
+        dog2.destroy()
+        info.changeScoreBy(1)
+    }
 })
 let projectile: Sprite = null
 let mySprite2: Sprite = null
+let dog2: Sprite = null
 let mySprite: Sprite = null
 mySprite = sprites.create(img`
     e e e . . . . e e e . . . . 
@@ -276,7 +283,7 @@ mySprite = sprites.create(img`
 let pPostionX = mySprite.x
 let pPositiony = mySprite.y
 controller.moveSprite(mySprite)
-let dog2 = sprites.create(img`
+dog2 = sprites.create(img`
     . . 4 4 4 . . . . 4 4 4 . . . . 
     . 4 5 5 5 e . . e 5 5 5 4 . . . 
     4 5 5 5 5 5 e e 5 5 5 5 5 4 . . 
