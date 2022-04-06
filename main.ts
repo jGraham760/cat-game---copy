@@ -253,11 +253,16 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (projectile.overlapsWith(mySprite2)) {
         mySprite2.destroy()
+        projectile.destroy()
         info.changeScoreBy(1)
     }
     if (dog2.overlapsWith(projectile)) {
         dog2.destroy()
+        projectile.destroy()
         info.changeScoreBy(1)
+    }
+    if (info.score() == 2) {
+        game.over(true, effects.hearts)
     }
 })
 let projectile: Sprite = null
@@ -299,7 +304,7 @@ dog2 = sprites.create(img`
     . . . f 5 f f f 5 f f 5 f . . . 
     . . . f f . . f f . . f f . . . 
     `, SpriteKind.Enemy)
-dog2.setPosition(randint(90, 100), randint(90, 10))
+dog2.setPosition(randint(100, 110), randint(100, 110))
 mySprite2 = sprites.create(img`
     . . 4 4 4 . . . . 4 4 4 . . . . 
     . 4 5 5 5 e . . e 5 5 5 4 . . . 
@@ -444,7 +449,7 @@ scene.setBackgroundImage(img`
     `)
 forever(function () {
     mySprite2.follow(mySprite, 40)
-    dog2.follow(mySprite, 40)
+    dog2.follow(mySprite, 45)
     if (mySprite.overlapsWith(mySprite2)) {
         mySprite.destroy(effects.spray, 500)
         game.over(false)
